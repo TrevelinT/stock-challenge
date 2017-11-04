@@ -9,19 +9,23 @@ class TrainingForm extends PureComponent {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <form onSubmit={this._handleSubmit}>
-                    <fieldset>
-                        <legend>Stock challenge</legend>
-                        <div>
-                            <label htmlFor="player-boss">Player boss</label>
-                            <input type="text" name="player-boss" id="" ref={(input) => this.player = input}/>
+                    <fieldset className="fieldset">
+                        <legend className="is-hidden">Stock challenge</legend>
+                        <div className="field">
+                            <label className="label" htmlFor="player-boss">Player boss</label>
+                            <div className="control">
+                                <input className="input" type="text" name="player-boss" id="" ref={(input) => this.player = input}/>
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="enemy-boss">Enemy boss</label>
-                            <input type="text" name="enemy-boss" id="" ref={(input) => this.enemy = input}/>
+                        <div className="field">
+                            <label className="label" htmlFor="enemy-boss">Enemy boss</label>
+                            <div className="control">
+                                <input className="input" type="text" name="enemy-boss" id="" ref={(input) => this.enemy = input}/>
+                            </div>
                         </div>
-                        <button type="submit">Fight!</button>
+                        <button className="button is-primary" type="submit">Fight!</button>
                     </fieldset>
                 </form>
             </div>

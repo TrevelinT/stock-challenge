@@ -14,21 +14,25 @@ class Versus extends Component {
     render() {
         const  { player, challenger } = this.props;
         return (
-            <div>
+            <div className="container">
                 <p>Personagem: {player.name}</p>
                 <p>Vidas: {player.stocks}</p>
                 <div>
                     <p>Próximo desafiante: {challenger.name}</p>
-                    <div>
-                        <button onClick={() => this.setState({ win: true })}>Venceu</button>
-                        <button onClick={this._onLose}>Perdeu</button>
-                        {this.state.win ? <div>
-                            <label htmlFor="remaining-stocks">Stocks restantes</label>
-                            <select name="remaining-stocks" id="" onChange={this._onWin}>
-                                <option value="" selected disabled>Selecione</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
+                    <div className="buttons">
+                        <button className="button is-primary" onClick={() => this.setState({ win: true })}>Venceu</button>
+                        <button className="button is-danger" onClick={this._onLose}>Perdeu</button>
+                        {this.state.win ? <div className="field">
+                            <label className="label" htmlFor="remaining-stocks">Stocks restantes</label>
+                            <div className="control">
+                                <div className="select">
+                                    <select name="remaining-stocks" id="" onChange={this._onWin}>
+                                        <option value="" selected disabled>Selecione</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div> : null }
                     </div>
                 </div>

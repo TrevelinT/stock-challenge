@@ -1,12 +1,22 @@
 import React from 'react';
 
-/* eslint-disable no-unused-vars */
-import css from '../../styles/main.scss';
+import '../../styles/main.scss';
 import Wrapper from '../../containers/Wrapper';
 
 const App = () => (
     <div className="app">
-        <h1 className="title">Stock challenge</h1>
+        <header className="hero is-info">
+            <div className="hero-body">
+                <div className="container">
+                    <h1 className="title">
+                    Stock Challenge
+                    </h1>
+                    <h2 className="subtitle">
+                    App baseado no stock challenge criado pelo Danilo Rosa
+                    </h2>
+                </div>
+            </div>
+        </header>
         <Wrapper />
     </div>
 );
