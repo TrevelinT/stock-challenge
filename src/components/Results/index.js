@@ -10,12 +10,12 @@ class Results extends PureComponent {
     render() {
         const { name, enemiesDefeated, onClick } = this.props;
         return (
-            <div>
+            <div className="container">
                 <p>Resultados:</p>
                 <p>Personagem: {name}</p>
                 <p>Inimigos derrubados: {enemiesDefeated}</p>
                 <div>
-                    <button onClick={onClick}>Novo Desafio</button>
+                    <button className="button is-primary" onClick={onClick}>Novo Desafio</button>
                 </div>
             </div>
         );
