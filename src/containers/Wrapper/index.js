@@ -24,7 +24,7 @@ class Wrapper extends Component {
         const { step } = this.state;
         const { props } = this;
 
-        if(props.player.stocks === 0) return <Results name={props.player.name} enemiesDefeated={2} onClick={() => {
+        if(props.player.stocks === 0) return <Results name={props.player.name} enemiesDefeated={props.enemiesDefeated.length} onClick={() => {
             this.props.reset();
             this.changeStep(2);
         }} />;
