@@ -11,29 +11,71 @@ class Versus extends Component {
         this._onLose = this._onLose.bind(this);
     }
 
+    getStocksStyle(stocks) {
+        if (stocks <= 5) {
+            return 'has-text-danger';
+        } else if (stocks <= 10) {
+            return 'has-text-warning';
+        } else {
+            return 'has-text-primary';
+        }
+    }
+
     render() {
         const  { player, challenger } = this.props;
+        const stocksStyle = this.getStocksStyle(player.stocks);
         return (
             <div className="container">
-                <p>Personagem: {player.name}</p>
-                <p>Vidas: {player.stocks}</p>
-                <div>
-                    <p>Próximo desafiante: {challenger.name}</p>
-                    <div className="buttons">
-                        <button className="button is-primary" onClick={() => this.setState({ win: true })}>Venceu</button>
-                        <button className="button is-danger" onClick={this._onLose}>Perdeu</button>
-                        {this.state.win ? <div className="field">
-                            <label className="label" htmlFor="remaining-stocks">Stocks restantes</label>
-                            <div className="control">
-                                <div className="select">
-                                    <select name="remaining-stocks" id="" onChange={this._onWin}>
-                                        <option value="" selected disabled>Selecione</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                    </select>
+                <div className="columns is-desktop">
+                    <div className="column">
+                        <article className="media">
+                            <figure className="media-left">
+                                <p className="image is-128x128">
+                                    <img src={player.image} alt={player.name} />
+                                </p>
+                            </figure>
+                            <div className="media-content">
+                                <div className="content">
+                                    <p className="title is-4">{player.name}</p>
+                                    {/* Insert pluralize */}
+                                    <p className={`${stocksStyle} subtitle is-6`}>{player.stocks} vidas</p>
+                                    <div>
+                                        <div className="buttons">
+                                            <button className="button is-primary" onClick={() => this.setState({ win: true })}>Venceu</button>
+                                            
+                                            {this.state.win ? <div className="field">
+                                                <label className="label" htmlFor="remaining-stocks">Stocks restantes</label>
+                                                <div className="control">
+                                                    <div className="select">
+                                                        <select name="remaining-stocks" id="" onChange={this._onWin}>
+                                                            <option value="" selected disabled>Selecione</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> : null}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div> : null }
+                        </article>
+                    </div>
+                    <div className="column"><p className="has-text-centered is-size-2">VS</p></div>
+                    <div className="column">
+                        <article className="media">
+                            <figure className="media-left">
+                                <p className="image is-128x128">
+                                    <img src={challenger.image} alt={challenger.name} />
+                                </p>
+                            </figure>
+                            <div className="media-content">
+                                <div className="content">
+                                    <p className="title is-4">{challenger.name}</p>
+                                    <button className="button is-primary" onClick={this._onLose}>Venceu</button>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
