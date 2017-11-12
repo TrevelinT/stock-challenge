@@ -4,25 +4,35 @@ export const CHALLENGE = 'CHALLENGE';
 export const REMOVE_STOCKS = 'REMOVE_STOCKS';
 export const RESET = 'RESET';
 
-export const addPlayer = (player) => ({
-    type: ADD_PLAYER,
-    payload: player
-});
+export function addPlayer(player) {
+    return {
+        type: ADD_PLAYER,
+        payload: player
+    };
+}
 
-export const addBoss = (boss) => ({
-    type: ADD_BOSS,
-    payload: boss
-});
+export function addBoss(boss) {
+    return {
+        type: ADD_BOSS,
+        payload: boss
+    };
+}
 
-export const challenge = () => ({
-    type: CHALLENGE,
-});
+export function challenge() {
+    return {
+        type: CHALLENGE,
+    };
+}
 
-export const removeStocks = (stocks) => ({
-    type: REMOVE_STOCKS,
-    payload: stocks
-});
+export function removeStocks(stocks) {
+    return {
+        type: REMOVE_STOCKS,
+        payload: stocks
+    };
+}
 
-export const reset = () => ({
-    type: RESET,
-});
+export function reset() {
+    return {
+        type: RESET,
+    };
+}
