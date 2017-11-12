@@ -1,12 +1,12 @@
 {
-  "name": "stockChallenge",
-  "version": "0.0.1",
+  "name": "stock-challenge",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha \"src/**/*.spec.js\" --require babel-register -b",
     "test:watch": "npm run test -- --watch",
-    "build": "rimraf dist && webpack -p --env=prod",
+    "build": "webpack -p --env=prod",
     "dev": "webpack-dashboard -- webpack-dev-server --env=dev"
   },
   "keywords": [],
@@ -43,6 +43,8 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "bulma": "^0.6.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "imagemin-webpack-plugin": "^1.5.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
