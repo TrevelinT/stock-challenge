@@ -24,7 +24,7 @@ class Wrapper extends Component {
         const { step } = this.state;
         const { props } = this;
 
-        if(props.player.stocks === 0) return <Results name={props.player.name} enemiesDefeated={props.enemiesDefeated.length} onClick={() => {
+        if (props.player.stocks === 0 || step === 3 && !props.challenger && !props.challengerList.length) return <Results name={props.characterList[props.player.id].name} enemiesDefeated={props.enemiesDefeated.length} onClick={() => {
             this.props.reset();
             this.changeStep(2);
         }} />;
@@ -41,13 +41,15 @@ class Wrapper extends Component {
                 }/> : null}
                 {step === 3 ? 
                     <Versus
-                        player={props.player}
-                        challenger={props.challenger}
+                        player={{
+                            stocks: props.player.stocks,
+                            character: props.characterList[props.player.id]
+                        }}
+                        challenger={props.characterList[props.challenger]}
                         onWin={this.onWin}
                         onLose={this.onLose}
                     /> : 
                 null}
-                {step === 4 ? <Results /> : null}
             </div>
         );
     }

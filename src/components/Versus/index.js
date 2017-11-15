@@ -6,6 +6,7 @@ class Versus extends Component {
 
         this.state = {
             win: false,
+            remainingStocks: 2,
         };
         this._onWin = this._onWin.bind(this);
         this._onLose = this._onLose.bind(this);
@@ -31,30 +32,30 @@ class Versus extends Component {
                         <article className="media">
                             <figure className="media-left">
                                 <p className="image is-128x128">
-                                    <img src={player.image} alt={player.name} />
+                                    <img src={player.character.image} alt={player.character.name} />
                                 </p>
                             </figure>
                             <div className="media-content">
                                 <div className="content">
-                                    <p className="title is-4">{player.name}</p>
+                                    <p className="title is-4">{player.character.name}</p>
                                     {/* Insert pluralize */}
                                     <p className={`${stocksStyle} subtitle is-6`}>{player.stocks} vidas</p>
                                     <div>
-                                        <div className="buttons">
-                                            <button className="button is-primary" onClick={() => this.setState({ win: true })}>Venceu</button>
-                                            
-                                            {this.state.win ? <div className="field">
-                                                <label className="label" htmlFor="remaining-stocks">Stocks restantes</label>
-                                                <div className="control">
-                                                    <div className="select">
-                                                        <select name="remaining-stocks" id="" onChange={this._onWin}>
-                                                            <option value="" selected disabled>Selecione</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                        </select>
-                                                    </div>
+                                        <div className="field has-addons">
+                                            <div className="control">
+                                                <div className="select">
+                                                    <select name="remaining-stocks" 
+                                                    value={this.state.remainingStocks} id="" onChange={(e) => this.setState({
+                                                        remainingStocks: e.target.value
+                                                    })}>
+                                                        <option value="1">Ganhou por 1 stock</option>
+                                                        <option value="2">Ganhou por 2 stocks</option>
+                                                    </select>
                                                 </div>
-                                            </div> : null}
+                                            </div>
+                                            <div className="control">
+                                                <button className="button is-primary" onClick={this._onWin}>Venceu</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,11 +83,13 @@ class Versus extends Component {
         );
     }
 
-    _onWin(e) {
-        this.props.onWin(e.target.value);
+    // Mudar nome pra handleWin ou fazer chamada direta
+    _onWin() {
+        this.props.onWin(this.state.remainingStocks);
         this.setState({ win: false });
     }
 
+    // Fazer chamada direta
     _onLose() {
         this.props.onLose();
         this.setState({ win: false });
