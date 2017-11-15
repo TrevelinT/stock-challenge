@@ -8,7 +8,6 @@ import {
 } from '../actions';
 import characterList from '../entities/characterList';
 import { shuffle } from '../helpers/shuffle';
-import findKeyInHash from '../helpers/findKeyInHash';
 
 const initialState = {
     player: {
@@ -31,13 +30,13 @@ export default function stockChallengeApp(state = initialState, action) {
             ...state,
             player: {
                 stocks: 20,
-                id: findKeyInHash('name', action.payload, state.characterList),
+                id: action.payload,
             }
         };
     // ADD_BOSS recebe um ID
     // eslint-disable-next-line
     case ADD_BOSS:
-        const bossId = findKeyInHash('name', action.payload, state.characterList);
+        const bossId = action.payload;
 
         return {
             ...state,

@@ -1,48 +1,56 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import Autocomplete from '../Autocomplete';
 
-class TrainingForm extends PureComponent {
+const propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    source: PropTypes.object.isRequired,
+};
+
+class TrainingForm extends Component {
     constructor(props) {
         super(props);
 
-        this._handleSubmit = this._handleSubmit.bind(this);
+        this.state = {
+            player: '',
+            enemy: ''
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleClick(type) {
+        return id => {
+            this.setState({
+                [type]: id
+            });
+        };
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onSubmit({
+            player: this.state.player,
+            enemy: this.state.enemy
+        });
     }
 
     render() {
         return (
             <div className="container">
-                <form onSubmit={this._handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <fieldset className="fieldset">
                         <legend className="is-hidden">Stock challenge</legend>
-                        <div className="field">
-                            <label className="label" htmlFor="player-boss">Player boss</label>
-                            <div className="control">
-                                <input className="input" type="text" name="player-boss" id="" ref={(input) => this.player = input}/>
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label" htmlFor="enemy-boss">Enemy boss</label>
-                            <div className="control">
-                                <input className="input" type="text" name="enemy-boss" id="" ref={(input) => this.enemy = input}/>
-                            </div>
-                        </div>
+                        <Autocomplete label="Player Boss" source={this.props.source} onClick={this.handleClick('player')} />
+                        <Autocomplete label="Enemy Boss" source={this.props.source} onClick={this.handleClick('enemy')} />
                         <button className="button is-primary" type="submit">Fight!</button>
                     </fieldset>
                 </form>
             </div>
         );
     }
-
-    _handleSubmit(e) {
-        e.preventDefault();
-        this.props.onSubmit({
-            player: this.player.value,
-            enemy: this.enemy.value
-        });
-    }
 }
 
-TrainingForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired
-};
+TrainingForm.propTypes = propTypes;
 
 export default TrainingForm;

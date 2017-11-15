@@ -31,8 +31,8 @@ class Wrapper extends Component {
 
         return (
             <div>
-                {step === 1 ? <Disclaimer onFinish={() => this.changeStep(2)}/> : null}
-                {step === 2 ? <TrainingForm onSubmit={(obj) => {
+                {step === 1 ? <Disclaimer onFinish={() => this.changeStep(2)} /> : null}
+                {step === 2 ? <TrainingForm source={props.characterList} onSubmit={(obj) => {
                     this.props.addPlayer(obj.player);
                     this.props.addBoss(obj.enemy);
                     this.props.challenge();
